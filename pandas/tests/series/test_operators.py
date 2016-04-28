@@ -264,6 +264,13 @@ class TestSeriesOperators(TestData, tm.TestCase):
         rs[2] += np.timedelta64(timedelta(minutes=5, seconds=1))
         self.assertEqual(rs[2], value)
 
+    def test_operator_series_comparison(self):
+        self.assert_series_equal((np.float64(0) > pd.Series([1, 2, 3])), (0.0 >
+                                 pd.Series([1, 2, 3])))
+        self.assert_series_equal((np.array([0, 1, 2])[0]) >
+                                 pd.Series([0, 1, 2]),
+                                 (0.0 > pd.Series([1, 2, 3])))
+
     def test_timedeltas_with_DateOffset(self):
 
         # GH 4532
